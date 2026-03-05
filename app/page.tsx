@@ -85,7 +85,6 @@ export default function Home() {
   }, [search, selectedCategory, selectedSubCategory]);
 
   const loadMore = useCallback(() => {
-    console.log("[loadMore] called", { loadingMore, hasMore, offset });
     if (loadingMore || !hasMore) return;
     setLoadingMore(true);
 
@@ -96,12 +95,9 @@ export default function Home() {
     if (selectedSubCategory) params.append("subCategory", selectedSubCategory);
     params.append("limit", String(PAGE_SIZE));
     params.append("offset", String(nextOffset));
-
-    console.log("[loadMore] fetching", `/api/products?${params}`);
     fetch(`/api/products?${params}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log("[loadMore] response", { received: data.products.length, total: data.total, nextOffset });
         setProducts((prev) => [...prev, ...data.products]);
         setOffset(nextOffset);
         setHasMore(nextOffset + data.products.length < data.total);
@@ -115,7 +111,6 @@ export default function Home() {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        console.log("[observer] intersecting", entries[0].isIntersecting);
         if (entries[0].isIntersecting) loadMore();
       },
       { rootMargin: "200px", threshold: 0 }
