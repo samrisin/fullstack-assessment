@@ -57,7 +57,7 @@ Using `**` as a subdomain wildcard future-proofs the config against other Amazon
 
 ---
 
-### 4. External Image Hostnames Not Configured
+### 4. Only 20 static products were shown, no way to load more products.
 
 **Problem**
 No products were loaded after we reached end of the scroll it seemed like there are only 20 products but when we loaded products by category more products were shown. So the problem was after initial call of the products, no more calls were made to fetch more products.
